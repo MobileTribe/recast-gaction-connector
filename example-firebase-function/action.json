@@ -1,0 +1,36 @@
+{
+  "actions": [
+    {
+      "description": "Default Welcome Intent",
+      "name": "MAIN",
+      "fulfillment": {
+        "conversationName": "recast.ai"
+      },
+      "intent": {
+        "name": "actions.intent.MAIN",
+        "trigger": {
+          "queryPatterns": [
+            "Parler à mon super bot"
+          ]
+        }
+      }
+    }
+  ],
+  "conversations": {
+    "recast.ai": {
+      "name": "recast.ai",
+      "url": "https://MY_CLOUD_FUNCTIONS_PROJECT.cloudfunctions.net/recast?botToken=MY_RECAST_API_KEY",
+      "inDialogIntents": [
+        {
+          "name": "actions.intent.CANCEL"
+        }
+      ]
+    }
+  },
+  "locale": "fr",
+  "manifest": {
+    "displayName": "Mon super bot",
+    "invocationName": "mon super bot",
+    "voiceName": "male_1"
+  }
+}

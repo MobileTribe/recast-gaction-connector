@@ -1,6 +1,6 @@
 # recast-gaction-connector
 
-[![npm version](https://badge.fury.io/js/recast-gaction-connector.svg)](cd)
+[![npm version](https://badge.fury.io/js/recast-gaction-connector.svg)](https://www.npmjs.com/recast-gaction-connector)
 [![Apache License 2](http://img.shields.io/badge/license-ASF2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 
 ## Note
@@ -52,7 +52,7 @@ function onRequest(req: Request, resp: Response){
 
 ## Partner
 
-[![Leroy Merlin,120,120](doc/partners/lm.jpg)](https://www.leroymerlin.fr)
+[![Leroy Merlin](doc/partners/lm.jpg =120x)](https://www.leroymerlin.fr)
 
 
 ## License

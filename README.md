@@ -53,7 +53,7 @@ function onRequest(req: Request, resp: Response){
 
 ## Partner
 
-![](https://github.com/MobileTribe/recast-gaction-connector/blob/master/doc/partners/lm.jpg =120,120)
+![](./doc/partners/lm.jpg)
 
 ## License
 

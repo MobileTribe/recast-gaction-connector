@@ -1,32 +1,64 @@
 import * as functions from 'firebase-functions';
 import {BotConnector} from "recast-gaction-connector";
 import {Request, Response} from "express"
+import * as admin from "firebase-admin";
+import {initializeApp} from "firebase-admin";
 
-let connectors: BotConnector[] = [];
+initializeApp();
 
+let cachedConnectors: BotConnector[];
 
-export const updateConnectors = functions.database.ref('/connectors')
-    .onUpdate((snapshot, context) => {
-        // Grab the current value of what was written to the Realtime Database.
-        connectors = [];
-        console.log("update connectors");
-        snapshot.after.forEach(connector => {
-            connectors.push(new BotConnector(connector.val()));
-            return false;
+function loadConnector(botToken: string, forceReload: boolean = false): Promise<BotConnector> {
+
+    if (cachedConnectors == null || forceReload) {
+        return loadConnectors()
+            .then(connectors => {
+                return connectors.find(connector => connector.recastBotToken === botToken);
+            });
+    } else {
+        let connector = cachedConnectors.find(connector => connector.recastBotToken === botToken);
+        if (connector == null) {
+            return loadConnector(botToken, true)
+        } else {
+            return Promise.resolve(connector)
+        }
+    }
+
+}
+
+function loadConnectors(): Promise<BotConnector[]> {
+    return admin.database().ref("/connectors")
+        .once("value")
+        .then(data => {
+            let connectors: BotConnector[] = [];
+            data.forEach(connector => {
+                connectors.push(new BotConnector(connector.val()));
+                return false;
+            });
+            console.log(connectors.length + " connectors loaded");
+            cachedConnectors = connectors;
+            return connectors
         });
-        console.log("connectors count " + connectors.length);
+}
 
-
-    });
 
 export const recast = functions.https.onRequest((request: Request, response: Response) => {
-    console.log("connectors count " + connectors.length);
     const botToken = request.query.botToken;
-    const connector = connectors.find(connector => connector.recastBotToken === botToken);
-    if (connector) {
-        connector.handleRequest(request, response)
-    } else {
-        response.sendStatus(404);
-        console.log("connector not found. Please configure - " + botToken);
-    }
+    loadConnector(botToken)
+        .then(value => {
+            if (value != null) {
+                return Promise.resolve(value);
+            } else {
+                return Promise.reject("connector not found");
+            }
+        })
+        .then(connector => {
+            return connector.handleRequest(request, response);
+        })
+        .catch(reason => {
+            console.error(reason);
+            return response.sendStatus(404);
+        });
+
+
 });

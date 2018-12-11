@@ -27,7 +27,7 @@ export interface BotConnectorOptions {
     debug?: boolean,
     recastBotToken?: string,
     autoChangeSurface?: boolean,
-    defaultErrorMessages?: Map<string, string>
+    defaultErrorMessages?: { [key: string]: string }
     voiceConfig?: VoiceConfig
 }
 
@@ -41,7 +41,7 @@ export class BotConnector {
 
     private actionsApp;
     recastBotToken: string;
-    defaultErrorMessages: Map<string, string>;
+    defaultErrorMessages: { [key: string]: string }
     debug: boolean;
     autoChangeSurface: boolean;
     voiceConfig: VoiceConfig;

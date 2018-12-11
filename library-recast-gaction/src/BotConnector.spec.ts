@@ -2,7 +2,7 @@ import {suite, test} from "mocha-typescript";
 
 import {BotConnector} from "./BotConnector";
 import * as assert from "assert";
-import {ActionsSdkConversation, SimpleResponse, Suggestions, BasicCard, List, BrowseCarousel} from "actions-on-google";
+import {ActionsSdkConversation, BasicCard, BrowseCarousel, List, SimpleResponse, Suggestions} from "actions-on-google";
 
 
 @suite("ClassA test suite")
@@ -14,7 +14,7 @@ class BotConnectorSuite extends BotConnector {
             gActionClientId: "",
             recastBotToken: "",
             autoChangeSurface: true,
-            defaultErrorMessages: new Map(),
+            defaultErrorMessages: {"fr-FR": "Je n'ai pas compris. Pouvez-vous répéter ?"},
             voiceConfig: {
                 shortPunctuationMs: 2000,
                 longPunctuationMs: 4000,

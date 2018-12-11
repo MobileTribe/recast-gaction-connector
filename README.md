@@ -1,6 +1,6 @@
-= recast-gaction-connector
+# recast-gaction-connector
 
-[![npm version](https://badge.fury.io/js/recast-gaction-connector.svg)](https://www.npmjs.com/@angular/core)
+[![npm version](https://badge.fury.io/js/recast-gaction-connector.svg)](cd)
 [![Apache License 2](http://img.shields.io/badge/license-ASF2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 
 ## Note
@@ -13,6 +13,10 @@ recast-gaction-connector is a npm library to help you connect your recast.ai bot
 *Feature*
 - Map all type of recast response to google action
 
+### *1.0.1* - (2018-12-10)
+*Fix*
+- Changelog
+- Connector defaultErrorMessages config
 
 ## Get started
 
@@ -48,7 +52,7 @@ function onRequest(req: Request, resp: Response){
 
 ## Partner
 
-[![Leroy Merlin,120,120](doc/lm.jpg)](https://www.leroymerlin.fr)
+[![Leroy Merlin,120,120](doc/partners/lm.jpg)](https://www.leroymerlin.fr)
 
 
 ## License

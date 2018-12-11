@@ -53,7 +53,7 @@ function onRequest(req: Request, resp: Response){
 
 ## Partner
 
-![](./doc/partners/lm.jpg)
+<img src="./doc/partners/lm.jpg" width="120" height="120">
 
 ## License
 

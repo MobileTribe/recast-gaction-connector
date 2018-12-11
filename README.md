@@ -7,17 +7,6 @@
 
 recast-gaction-connector is a npm library to help you connect your recast.ai bot to google action.
 
-## Changelog
-
-### *1.0.0* - (2018-12-10)
-*Feature*
-- Map all type of recast response to google action
-
-### *1.0.1* - (2018-12-10)
-*Fix*
-- Changelog
-- Connector defaultErrorMessages config
-
 ## Get started
 
 ```typescript
@@ -50,10 +39,21 @@ function onRequest(req: Request, resp: Response){
 
 ```
 
+## Changelog
+
+### *1.0.0* - (2018-12-10)
+*Feature*
+- Map all type of recast response to google action
+
+### *1.0.1* - (2018-12-10)
+*Fix*
+- Changelog
+- Connector defaultErrorMessages config
+
+
 ## Partner
 
-[![Leroy Merlin](doc/partners/lm.jpg =120x)](https://www.leroymerlin.fr)
-
+![](https://github.com/MobileTribe/recast-gaction-connector/blob/master/doc/partners/lm.jpg =120,120)
 
 ## License
 

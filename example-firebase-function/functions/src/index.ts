@@ -2,9 +2,8 @@ import * as functions from 'firebase-functions';
 import {BotConnector} from "recast-gaction-connector";
 import {Request, Response} from "express"
 import * as admin from "firebase-admin";
-import {initializeApp} from "firebase-admin";
 
-initializeApp();
+admin.initializeApp(functions.config().firebase);
 
 let cachedConnectors: BotConnector[];
 

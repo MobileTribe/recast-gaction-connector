@@ -41,14 +41,21 @@ function onRequest(req: Request, resp: Response){
 
 ## Changelog
 
-### *1.0.0* - (2018-12-10)
-*Feature*
-- Map all type of recast response to google action
+### *1.0.2* - (2018-12-14)
+*Refactor*
+- Handle Google Crawler intent to avoid a recast call
 
 ### *1.0.1* - (2018-12-10)
 *Fix*
 - Changelog
 - Connector defaultErrorMessages config
+
+
+### *1.0.0* - (2018-12-10)
+*Feature*
+- Map all type of recast response to google action
+
+
 
 
 ## Partner

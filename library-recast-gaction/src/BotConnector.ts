@@ -65,12 +65,18 @@ export class BotConnector {
         }
 
 
-        // this.actionsApp.intent('actions.intent.CANCEL', (conv: ActionsSdkConversation) => {
-        //     this.updateConversationIntent(conv);
-        //     return this.handleGoogleConversation(conv, true);
-        //
-        // })
-        // ;
+        this.actionsApp.intent('actions.intent.MAIN', (conv: ActionsSdkConversation) => {
+            if (conv.arguments && conv.arguments.parsed && conv.arguments.parsed.input && conv.arguments.parsed.input['is_health_check'] === true) {
+                if (this.debug) {
+                    console.log("Google Crawler detected");
+                }
+                conv.ask(new SimpleResponse("Hi, Google Crawler"));
+                return Promise.resolve(conv)
+            } else {
+                this.updateConversationIntent(conv);
+                return this.handleGoogleConversation(conv);
+            }
+        });
 
         this.actionsApp.intent('actions.intent.NEW_SURFACE', (conv, input, newSurface) => {
             this.updateConversationIntent(conv);

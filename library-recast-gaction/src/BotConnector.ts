@@ -132,14 +132,6 @@ export class BotConnector {
                 if (this.debug) {
                     console.log("received recast dialog : ", JSON.stringify(result));
                 }
-                conv.user.storage = {};
-                for (let prop in result.conversation.memory) {
-                    if (result.conversation.memory.hasOwnProperty(prop)) {
-                        conv.user.storage[prop] = result.conversation.memory[prop];
-                    }
-                }
-
-
                 let shouldCloseConversation = result.conversation.memory[BotConnector.MEMORY_CLOSE_CONVERSATION] === true;
 
 

@@ -35,9 +35,11 @@ function onRequest(req: Request, resp: Response){
     return botConnector.handleRequest(req, resp)
 }
 
-
-
 ```
+
+## TIPS
+
+To close the conversation in Google Action set CLOSE_CONVERSATION to true in the memory of Recast. The connector will close the conversation for you.
 
 ## Changelog
 

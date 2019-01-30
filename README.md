@@ -23,10 +23,10 @@ let botConnector = new BotConnector({
      defaultErrorMessages: {"fr-FR": "Je n'ai pas compris. Pouvez-vous répéter ?"}, 
      //if you want to override default google voice
      voiceConfig: {
-         shortPunctuationMs: 2000,
-         longPunctuationMs: 4000,
-         rate: "2st",
-         pitch: '200%'
+         shortPunctuationMs: 200,
+         longPunctuationMs: 400,
+         rate: "100%",
+         pitch: '0st'
      }
  });
 

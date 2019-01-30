@@ -19,8 +19,8 @@ class BotConnectorSuite extends BotConnector {
             voiceConfig: {
                 shortPunctuationMs: 2000,
                 longPunctuationMs: 4000,
-                rate: "2st",
-                pitch: '200%'
+                rate: "200%",
+                pitch: '2st'
             }
         });
 

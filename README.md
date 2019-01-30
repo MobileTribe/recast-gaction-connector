@@ -19,6 +19,8 @@ let botConnector = new BotConnector({
      recastBotToken: "",
      //if true the connector will handle the request to go to the smartphone if you want to display a card
      autoChangeSurface: true,
+     //Add 1s break between two text messages if true
+     pauseBetweenMessages: true,
      //error message if an error append (if empty it close the conversation)
      defaultErrorMessages: {"fr-FR": "Je n'ai pas compris. Pouvez-vous répéter ?"}, 
      //if you want to override default google voice

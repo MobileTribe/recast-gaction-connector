@@ -27,6 +27,7 @@ export interface BotConnectorOptions {
     debug?: boolean,
     recastBotToken?: string,
     autoChangeSurface?: boolean,
+    pauseBetweenMessages: boolean,
     defaultErrorMessages?: { [key: string]: string }
     voiceConfig?: VoiceConfig
 }
@@ -41,9 +42,10 @@ export class BotConnector {
 
     private actionsApp;
     recastBotToken: string;
-    defaultErrorMessages: { [key: string]: string }
+    defaultErrorMessages: { [key: string]: string };
     debug: boolean;
     autoChangeSurface: boolean;
+    pauseBetweenMessages: boolean;
     voiceConfig: VoiceConfig;
 
     public constructor(options: BotConnectorOptions) {
@@ -51,6 +53,7 @@ export class BotConnector {
             clientId: options.gActionClientId,
             debug: options.debug
         });
+        this.pauseBetweenMessages = options.pauseBetweenMessages;
         this.defaultErrorMessages = options.defaultErrorMessages;
         this.recastBotToken = options.recastBotToken;
         this.debug = options.debug;
@@ -181,7 +184,8 @@ export class BotConnector {
         //group recast responses
         for (let i = responses.length - 1; i >= 1; i--) {
             if (responses[i].type === "text" && responses[i].type === responses[i - 1].type) {
-                responses[i - 1].content = responses[i - 1].content + "<break time='1000ms'/>\n" + responses[i].content
+                let separator = this.pauseBetweenMessages ? "<break time='1000ms'/>\n" : "\n";
+                responses[i - 1].content = responses[i - 1].content + separator + responses[i].content
                 responses.splice(i, 1)
             }
         }

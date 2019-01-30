@@ -14,6 +14,7 @@ class BotConnectorSuite extends BotConnector {
             gActionClientId: "",
             recastBotToken: "",
             autoChangeSurface: true,
+            pauseBetweenMessages: true,
             defaultErrorMessages: {"fr-FR": "Je n'ai pas compris. Pouvez-vous répéter ?"},
             voiceConfig: {
                 shortPunctuationMs: 2000,

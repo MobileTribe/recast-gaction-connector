@@ -184,7 +184,7 @@ export class BotConnector {
         //group recast responses
         for (let i = responses.length - 1; i >= 1; i--) {
             if (responses[i].type === "text" && responses[i].type === responses[i - 1].type) {
-                let separator = this.pauseBetweenMessages ? "<break time='1000ms'/>\n" : "\n";
+                let separator = this.pauseBetweenMessages ? "<break time='1000ms'/>\n" : " ";
                 responses[i - 1].content = responses[i - 1].content + separator + responses[i].content
                 responses.splice(i, 1)
             }

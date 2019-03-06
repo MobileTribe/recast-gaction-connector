@@ -220,15 +220,21 @@ export class BotConnector {
                     break;
                 case "list":
                     let listItems = [];
-                    response.content.elements.forEach(recastListItem => {
-                        listItems.push({
-                            title: recastListItem.title,
+                    response.content.elements.forEach( recastListItem => {
+                        var listItem = { 
+                            title: recastListItem.title || ( recastListItem.buttons[ 0 ] ? recastListItem.buttons[ 0 ].title : "" ),
                             description: recastListItem.subtitle,
-                            image: new Image({
+                            image: recastListItem.imageUrl ? new Image({
                                 url: recastListItem.imageUrl,
                                 alt: "image",
-                            }),
-                        });
+                            }) : null,
+                            optionInfo: {
+                                key: "",
+                                synonyms: []
+                            } 
+                        };
+                        listItem.optionInfo.key = ( recastListItem.buttons[ 0 ] ? recastListItem.buttons[ 0 ].value : "" ) || listItem.title;
+                        listItems.push( listItem );
                     });
                     googleResponses.push(new List({items: listItems}));
                     break;
@@ -249,7 +255,6 @@ export class BotConnector {
                             buttonUrl: recastButton ? recastButton.value : null,
                         };
                     }
-
 
                     if (!conv.screen) {
 

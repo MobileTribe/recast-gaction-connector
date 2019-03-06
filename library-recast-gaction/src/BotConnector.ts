@@ -184,7 +184,7 @@ export class BotConnector {
         //group recast responses
         for (let i = responses.length - 1; i >= 1; i--) {
             if (responses[i].type === "text" && responses[i].type === responses[i - 1].type) {
-                let separator = this.pauseBetweenMessages ? "<break time='1000ms'/>\n" : " ";
+                let separator = this.pauseBetweenMessages ? "<break time='1000ms'/>\n" : "\n";
                 responses[i - 1].content = responses[i - 1].content + separator + responses[i].content
                 responses.splice(i, 1)
             }
@@ -221,14 +221,20 @@ export class BotConnector {
                 case "list":
                     let listItems = [];
                     response.content.elements.forEach(recastListItem => {
-                        listItems.push({
-                            title: recastListItem.title,
+                        var listItem = { 
+                            title: recastListItem.title || ( recastListItem.buttons[ 0 ] ? recastListItem.buttons[ 0 ].title : "" ),
                             description: recastListItem.subtitle,
                             image: new Image({
-                                url: recastListItem.imageUrl,
+                                url: recastListItem.imageUrl || null,
                                 alt: "image",
                             }),
-                        });
+                            optionInfo: {
+                                key: "",
+                                synonyms: []
+                            } 
+                        };
+                        listItem.optionInfo.key = listItem.title || ( recastListItem.buttons[ 0 ] ? recastListItem.buttons[ 0 ].value : "" );
+                        listItems.push( listItem );
                     });
                     googleResponses.push(new List({items: listItems}));
                     break;
@@ -249,7 +255,6 @@ export class BotConnector {
                             buttonUrl: recastButton ? recastButton.value : null,
                         };
                     }
-
 
                     if (!conv.screen) {
 

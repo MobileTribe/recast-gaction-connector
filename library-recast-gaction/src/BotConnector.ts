@@ -184,7 +184,7 @@ export class BotConnector {
         //group recast responses
         for (let i = responses.length - 1; i >= 1; i--) {
             if (responses[i].type === "text" && responses[i].type === responses[i - 1].type) {
-                let separator = this.pauseBetweenMessages ? "<break time='1000ms'/>\n" : "\n";
+                let separator = this.pauseBetweenMessages ? "<break time='1000ms'/>\n" : " ";
                 responses[i - 1].content = responses[i - 1].content + separator + responses[i].content
                 responses.splice(i, 1)
             }
@@ -220,20 +220,20 @@ export class BotConnector {
                     break;
                 case "list":
                     let listItems = [];
-                    response.content.elements.forEach(recastListItem => {
+                    response.content.elements.forEach( recastListItem => {
                         var listItem = { 
                             title: recastListItem.title || ( recastListItem.buttons[ 0 ] ? recastListItem.buttons[ 0 ].title : "" ),
                             description: recastListItem.subtitle,
-                            image: new Image({
-                                url: recastListItem.imageUrl || null,
+                            image: recastListItem.imageUrl ? new Image({
+                                url: recastListItem.imageUrl,
                                 alt: "image",
-                            }),
+                            }) : null,
                             optionInfo: {
                                 key: "",
                                 synonyms: []
                             } 
                         };
-                        listItem.optionInfo.key = listItem.title || ( recastListItem.buttons[ 0 ] ? recastListItem.buttons[ 0 ].value : "" );
+                        listItem.optionInfo.key = ( recastListItem.buttons[ 0 ] ? recastListItem.buttons[ 0 ].value : "" ) || listItem.title;
                         listItems.push( listItem );
                     });
                     googleResponses.push(new List({items: listItems}));
